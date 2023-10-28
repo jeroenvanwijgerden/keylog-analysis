@@ -7,7 +7,7 @@
     (subs key 0 (- (count key) 2))
     key))
 
-(def data (->> (slurp "resources/clj.log")
+(def data (->> (slurp "resources/sensitive/clj.log")
                (clojure.string/split-lines)
                (map-indexed (fn [line-nr line]
                       (let [[time event key] (clojure.string/split line #" ")]
