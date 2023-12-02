@@ -8,7 +8,7 @@ With the help of AI I wrote ![keylog.sh](keylog.sh) (because life is too short t
 
 # SECURITY WARNING
 
-If you want to analyze your own keypresses, be aware that storing your keypresses enables a dedicated attacker to reconstruct your passwords and love letters. Never upload upload a log with potentially senstive information to the public internet. Notice the `resources/sensitive` in the `.gitignore` file.
+If you want to analyze your own keypresses, be aware that storing your keypresses enables a dedicated attacker to reconstruct your passwords and love letters. Never upload a log with potentially senstive information to the public internet. Notice the `resources/sensitive` in the `.gitignore` file.
 
 # Using keylog.sh
 
