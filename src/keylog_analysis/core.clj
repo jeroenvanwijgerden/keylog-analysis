@@ -17,18 +17,11 @@
                          :key     (keyword (remove-L-R-from-key key))})))))
 
 
-; chords: keys that are pressed at the same time.
-; press, and everything that is pressed after, until release, is a chord.
-; for not consider build a chord greedily.
-; TODO: improvement: in a chord, as soon as a key is released, the chord is over.
-;       if a new key is pressed while other keys in the chord are still pressed, it is a new chord.
-;       but, if a key is release for the second time in a chord, there is no new chord;
-;       a new chord is started as soon as a key is pressed, potentially with keys that were part
-;       of a previous chords but hadn't been released yet.
-;       if I want to archive key releases in a chord as well, could be that
-;       there are many other key presses/releases in between, e.g. spamming ctrl+z,z,z,z,z
-;       how to implement? could maintain a map of press to release; in first pass only add presses
-;       to chords, in second wave add releases to chords, sort on time.
+; A chord is a sequence of keys that were held down at the same time.
+; Note that e.g. holding down Ctrl while spamming z,z,z,z results in four chords, all of the form '(:Ctrl :z).
+; More generally, when keys A and B are both pressed, when B is released the chord AB is registered,
+; when key C is pressed and released chord AC is registered.
+; This works for any number of keys in a chord.
 (defn chords [data]
   (let [data (drop-while #(not (:press? %)) data)]
     (loop [chords []
