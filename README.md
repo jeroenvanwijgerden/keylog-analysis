@@ -50,7 +50,7 @@ Use ![src/keylog_analysis/core.clj](src/keylog_analysis/core.clj) in a REPL.
 
 # My analysis
 
-I spat ('`clojure.core/spit`ted') some results in ![doc/](doc/), one file containing the most common presses and chords for three modes of work: working on a Java backend in IntelliJ (![doc/java.edn](doc/java.edn)), writing the code for this project in VSCode (![](doc/clj.edn)) and writing a small article in a markup language I'm working on in VSCode, so mostly prose (![doc/gobbo.edn](doc/gobbo.edn)).
+I spat ('`clojure.core/spit`ted') some results in ![doc/](doc/), one file containing the most common presses and chords for three modes of work: working on a Java backend in IntelliJ (![doc/java.edn](doc/java.edn)), writing the code for this project in VSCode (![doc/clj.edn](doc/clj.edn)) and writing a small article in a markup language I'm working on in VSCode, so mostly prose (![doc/gobbo.edn](doc/gobbo.edn)).
 
 Note how the most common keys and chords differ between the modes of work, but that arrow keys and navigation chords are always very common.
 
