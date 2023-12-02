@@ -1,13 +1,13 @@
 (ns keylog-analysis.core)
 
-
+; I don't want to distinguish between for example left and right shift.
 (defn remove-L-R-from-key [key]
   (if (or (clojure.string/ends-with? key "_L")
           (clojure.string/ends-with? key "_R"))
     (subs key 0 (- (count key) 2))
     key))
 
-(def data (->> (slurp "resources/sensitive/clj.log")
+(def data (->> (slurp "resources/gobbo.log")
                (clojure.string/split-lines)
                (map-indexed (fn [line-nr line]
                       (let [[time event key] (clojure.string/split line #" ")]
@@ -16,21 +16,6 @@
                          :press?  (= event "press")
                          :key     (keyword (remove-L-R-from-key key))})))))
 
-(->> data
-     (map :time)
-     (#(map vector (rest %) (butlast %)))
-     (map (partial apply -))
-     (map #(cond
-             (<= % 500) 50
-             (<= % 1000) 100
-             (<= % 1500) 150
-             (<= % 2000) 200
-             (<= % 3000) 300
-             (<= % 5000) 500
-             (<= % 10000) 1000
-             :else 9999))
-     (frequencies)
-     (sort-by first))
 
 ; chords: keys that are pressed at the same time.
 ; press, and everything that is pressed after, until release, is a chord.
@@ -86,28 +71,28 @@
                     (sort-by :time)))
              chords)))))
 
-#_(chords [{:time 1 :press? true :key :Control}
-         {:time 2 :press? true :key :z}
-         {:time 3 :press? false :key :z}
-         {:time 4 :press? true :key :z}
-         {:time 5 :press? false :key :z}
-         {:time 6 :press? false :key :Control}])
+
 
 (def chords-by-keys
   (->> data
        chords
        (group-by (comp distinct #(map :key %)))))
 
+
+
+; Most common chords
 (->> chords-by-keys
      (sort-by (comp count second))
      reverse
      (map (juxt first (comp count second)))
      (take 25))
 
+
+; Most common keys pressed
 (->> data
      (map :key)
      frequencies
      (sort-by second)
       reverse
       (map (juxt first second))
-     (take 25))
+     (take 50))

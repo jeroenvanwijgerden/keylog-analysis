@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# use
+# xinput --list | grep -i keyboard | grep -iv "Virtual core" | grep -iv Button
+# to find the name of your keyboard, and replace
+# LITEON Technology USB Multimedia Keyboard
+# with that name.
 DEVICE_IDS=$(xinput list | grep -Po 'LITEON Technology USB Multimedia Keyboard.*id=\K\d+')
 
 if [ $# -eq 0 ]; then
@@ -10,7 +15,6 @@ else
     OUTPUT_FILE="$1"
 fi
 
-# Function to convert keycodes to key names
 keycode_to_keyname() {
   xmodmap -pke | awk -v keycode="$1" '$1 == "keycode" && $2 == keycode {print $4; exit}'
 }
