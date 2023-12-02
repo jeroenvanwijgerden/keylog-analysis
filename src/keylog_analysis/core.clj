@@ -17,13 +17,15 @@
                          :key     (keyword (remove-L-R-from-key key))})))))
 
 
-; A chord is a sequence of keys that were pressed down at the same time
-; until one of these keys was released.
-; Note that e.g. holding down Ctrl while spamming z,z,z,z results in four chords, all of the form Ctrl+z.
-; More generally, when keys A and B are both pressed, when B is released the chord A+B is registered,
-; when key C is pressed and released chord A+C is registered.
-; This works for any number of keys in a chord.
-(defn chords [data]
+(defn chords
+  "A chord is a sequence of keys that were pressed down at the same time
+   until one of these keys was released.
+   Note that e.g. holding down Ctrl while spamming z,z,z,z results in four chords,
+   all of the form Ctrl+z.
+   More generally, when keys A and B are both pressed, when B is released the chord
+   A+B is registered, when key C is pressed and released chord A+C is registered.
+   This works for any number of keys in a chord."
+  [data]
   (let [data (drop-while #(not (:press? %)) data)]
     (loop [chords []
            key->press-event {}
