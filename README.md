@@ -4,7 +4,7 @@ Firstly, as a programmer, I type more special symbols than are present in these 
 
 Secondly, such analyses do not measure keys that are not visible in a final text. Think of keys for hotkeys, or even simple arrow keys for navigation while writing.
 
-With the help of AI I wrote ![](keylog.sh) (because life is too short to learn Bash) that dumps all keypresses in a file, which I could then analyze to my heart's content.
+With the help of AI I wrote ![keylog.sh](keylog.sh) (because life is too short to learn Bash) that dumps all keypresses in a file, which I could then analyze to my heart's content.
 
 # SECURITY WARNING
 
@@ -42,15 +42,15 @@ The script keeps running until you stop it.
 
 The `4` on line 28 in `keylog.sh` determines the time granularity. `4` means a second with four decimals, so the granularity is 0.1 millisecond. 
 
-See ![](resources/gobbo.log) for an example of the output. Each key press/release appears on a line, in chronological order.
+See ![resources/gobbo.log](resources/gobbo.log) for an example of the output. Each key press/release appears on a line, in chronological order.
 
 # Analyzing
 
-Use ![](src/keylog_analysis/core.clj) in a REPL.
+Use ![src/keylog_analysis/core.clj](src/keylog_analysis/core.clj) in a REPL.
 
 # My analysis
 
-I spat ('`clojure.core/spit`ted') some results in ![](doc/), one file containing the most common presses and chords for three modes of work: working on a Java backend in IntelliJ (![](doc/java.edn)), writing the code for this project in VSCode (![](doc/clj.edn)) and writing a small article in a markup language I'm working on in VSCode, so mostly prose (![](doc/gobbo.edn)).
+I spat ('`clojure.core/spit`ted') some results in ![doc/](doc/), one file containing the most common presses and chords for three modes of work: working on a Java backend in IntelliJ (![doc/java.edn](doc/java.edn)), writing the code for this project in VSCode (![](doc/clj.edn)) and writing a small article in a markup language I'm working on in VSCode, so mostly prose (![doc/gobbo.edn](doc/gobbo.edn)).
 
 Note how the most common keys and chords differ between the modes of work, but that arrow keys and navigation chords are always very common.
 
